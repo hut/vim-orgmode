@@ -217,6 +217,8 @@ def fold_text(allow_dirty=False):
 			str_heading = str_heading.replace(u'\t', u' ' * (ts - spaces), 1)
 			str_heading = str_heading.replace(u'\t', u' ' * ts)
 
+		str_heading = re.sub(r'\*(?=\*)', ' ', str_heading)  # Make leading n-1 asterisks invisible
+
 		# Workaround for vim.command seems to break the completion menu
 		vim.eval(u_encode(u'SetOrgFoldtext("%s...")' % (re.sub(r'\[\[([^[\]]*\]\[)?([^[\]]+)\]\]', r'\2',
 				str_heading).replace( u'\\', u'\\\\').replace(u'"', u'\\"'), )))
